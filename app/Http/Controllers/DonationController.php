@@ -28,7 +28,7 @@ class DonationController extends Controller
             return response()
                 ->json(["errors" => $validator->errors()], 400);
         }
-        $count = isset($request->count) ? $request->count : 3;
+        $count = isset($request->count) ? $request->count : 10;
         $state = $request->state;
 
         if ($state) {
