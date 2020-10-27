@@ -12,6 +12,7 @@ class Donation extends Model
     protected $fillable = [
         
         'state',
+        'date',
         'donor_name',
         'donation_details',
         'donation_type',

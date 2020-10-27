@@ -76,15 +76,17 @@ class DonationController extends Controller
             'donation_details' => 'required',
             'donation_type' => 'required',
             'donation_amount' => 'required',
+            'date' => 'required|date_format:Y-m-d',
             'source' => 'required',
         ]);
-
+        $date = \Carbon\Carbon::createFromFormat("Y-m-d", $request->date);
         $donation = new donation;
         $donation->state = $request->state;
         $donation->donor_name = $request->donor_name;
         $donation->donation_details = $request->donation_details;
         $donation->donation_type = $request->donation_type;
         $donation->donation_amount = $request->donation_amount;
+        $donation->date = $request->date;
         $donation->source = $request->source;
         $donation->save();
 
