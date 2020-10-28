@@ -18,7 +18,7 @@ class CreateDonationsTable extends Migration
             $table->string('state');
             $table->string('date');
             $table->string('donor_name');
-            $table->string('donation_details');
+            $table->text('donation_details');
             $table->string('donation_type');
             $table->string('donation_amount');
             $table->string('source');
