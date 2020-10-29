@@ -11,6 +11,11 @@ class Media extends Model
 
     protected $fillable = [
         
-        'image'
+        'file_url','file_name','file_size'
     ];
+
+    // public function getImageAttribute($image)
+    // {
+    //     return asset($image);
+    // }  
 }
