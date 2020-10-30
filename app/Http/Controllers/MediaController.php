@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Media;
+use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
+     * @group  Media Management
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -31,6 +34,10 @@ class MediaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     *@bodyParam  image string required The file_path of the Media data.
+     *
+     * @group  Media Management
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,7 +49,7 @@ class MediaController extends Controller
         
         $image = $request->file('image');
         $originalname = $image->getClientOriginalName();//Getting original name
-        $path = $image->store('uploads', 'public'); //Getting the storage path
+         $path = $image->store('uploads', 'public'); //Getting the storage path
         $realPath = "storage/{$path}";
         $imgsizes = $image->getSize();//Getting the image size in bytes
         $media = new media;
@@ -55,7 +62,11 @@ class MediaController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     *@queryParam  id required The id of the Media data.
      *
+     * @group  Media Management
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -90,16 +101,21 @@ class MediaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @queryParam  id required The id of the Media data.
+     *
+     * @group  Media Management
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $media = Media::find($id);
-
-        $media->delete();
-
-        return response()
+        $path = str_replace('storage/', '', $media->file_url);
+        $filePath = "public/{$path}";
+        if(Storage::delete($filePath)){
+             $media->delete();
+             return response()
             ->json(["message" => "Image file deleted"]);
+        }
     }
 }

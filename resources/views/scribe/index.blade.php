@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: October 28 2020</li>
+            <li>Last updated: October 26 2020</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -1338,7 +1338,144 @@ fetch(url, {
 </code></pre>
 <h3>Request</h3>
 <p><small class="badge badge-green">GET</small>
-<strong><code>/</code></strong></p>
+<strong><code>/</code></strong></p><h1>Media Management</h1>
+<h2>Display a listing of the resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/media" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/media"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">
+[]</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-green">GET</small>
+<strong><code>api/media</code></strong></p>
+<h2>Display the specified resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/media/{id}?id=aut" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/media/{id}"
+);
+
+let params = {
+    "id": "aut",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-green">GET</small>
+<strong><code>api/media/{id}</code></strong></p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p><code><b>id</b></code>&nbsp; <small>string</small>     <br>
+The id of the Media data.</p>
+<h2>Store a newly created resource in storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/media" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"image":"sunt"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/media"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "image": "sunt"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-black">POST</small>
+<strong><code>api/media</code></strong></p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p><code><b>image</b></code>&nbsp; <small>string</small>     <br>
+The file_path of the Media data.</p>
+<h2>Remove the specified resource from storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://localhost/api/media/{id}?id=aliquid" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/media/{id}"
+);
+
+let params = {
+    "id": "aliquid",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-red">DELETE</small>
+<strong><code>api/media/{id}</code></strong></p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p><code><b>id</b></code>&nbsp; <small>string</small>     <br>
+The id of the Media data.</p>
     </div>
     <div class="dark-box">
                     <div class="lang-selector">
