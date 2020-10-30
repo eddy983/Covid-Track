@@ -11,6 +11,7 @@ class MediaController extends Controller
     /**
      * Display a listing of the resource.
      * 
+     *
      * @group  Media Management
      * 
      * @return \Illuminate\Http\Response

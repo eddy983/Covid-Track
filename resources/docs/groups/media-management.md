@@ -57,7 +57,7 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/media/{id}?id=aut" \
+    -G "http://localhost/api/media/{id}?id=in" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -68,7 +68,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "aut",
+    "id": "in",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -111,7 +111,7 @@ curl -X POST \
     "http://localhost/api/media" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"image":"sunt"}'
+    -d '{"image":"molestias"}'
 
 ```
 
@@ -126,7 +126,7 @@ let headers = {
 };
 
 let body = {
-    "image": "sunt"
+    "image": "molestias"
 }
 
 fetch(url, {
@@ -159,7 +159,7 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/media/{id}?id=aliquid" \
+    "http://localhost/api/media/{id}?id=id" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -170,7 +170,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "aliquid",
+    "id": "id",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
