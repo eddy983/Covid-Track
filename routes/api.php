@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\StatsController;
+use App\Http\Controllers\StateController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,4 +37,18 @@ Route::group(['prefix' => 'media'], function () {
     Route::get('/{id}', [MediaController::class, 'show']);
     Route::post('/', [MediaController::class, 'store']);
     Route::delete('/{id}', [MediaController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'stats'], function () {
+    Route::get('/', [StatsController::class, 'index']);
+    Route::post('/', [StatsController::class, 'store']);
+    Route::get('/{id}', [StatsController::class, 'show']);
+    Route::put('/{id}', [StatsController::class, 'update']);
+    Route::delete('/{id}', [StatsController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'state'], function () {
+    Route::get('/', [StateController::class, 'index']);
+    Route::post('/', [StateController::class, 'store']);
+    
 });
