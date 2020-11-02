@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Make sure the directory for compiled views exist
+        if (! is_dir(config('view.compiled'))) {
+            mkdir(config('view.compiled'), 0755, true);
+        }
+
+        Schema::defaultStringLength(191);
     }
 }
