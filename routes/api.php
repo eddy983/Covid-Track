@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\MediaController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,4 +28,11 @@ Route::group(['prefix' => 'donation'], function () {
     Route::post('/', [DonationController::class, 'store']);
     Route::put('/{id}', [DonationController::class, 'update']);
     Route::delete('/{id}', [DonationController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'media'], function () {
+    Route::get('/', [MediaController::class, 'index']);
+    Route::get('/{id}', [MediaController::class, 'show']);
+    Route::post('/', [MediaController::class, 'store']);
+    Route::delete('/{id}', [MediaController::class, 'destroy']);
 });
