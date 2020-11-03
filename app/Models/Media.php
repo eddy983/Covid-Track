@@ -18,4 +18,9 @@ class Media extends Model
     // {
     //     return asset($image);
     // }  
+
+    public function getFileUrlAttribute($filename)
+    {
+        return env("MIX_ASSET_URL")."/$filename";
+    }
 }

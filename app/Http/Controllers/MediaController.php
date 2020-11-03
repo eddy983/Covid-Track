@@ -35,7 +35,7 @@ class MediaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     *@bodyParam  image string required The file_path of the Media data.
+     * @bodyParam  image string required The uploaded image.
      *
      * @group  Media Management
      * 
@@ -44,19 +44,33 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
+        /*request()->validate([
             'image' => ['required', 'image'],
+        ]);*/ 
+
+        $validator = \Validator::make($request->all(), [  
+            'image' => 'required|image|mimes:jpeg,png,jpg'
         ]);
+
+        if ($validator->fails()) {  
+            return response()
+                        ->json(["errors"=>$validator->errors()], 400);
+        }
         
         $image = $request->file('image');
         $originalname = $image->getClientOriginalName();//Getting original name
-         $path = $image->store('uploads', 'public'); //Getting the storage path
-        $realPath = "storage/{$path}";
+
+        $filePath = "media/$originalname";
+        Storage::disk('s3')->put($filePath, file_get_contents($image), [ 'visibility' => 'public']);
+        //$path = $image->store('uploads', 'public'); //Getting the storage path
+        //$realPath = "storage/{$path}";
+
+
         $imgsizes = $image->getSize();//Getting the image size in bytes
         $media = new media;
         $media->file_size = $imgsizes;
         $media->file_name = $originalname;
-        $media->file_url = $realPath;     
+        $media->file_url = $filePath;     
         $media->save();
         return $media;
     }
@@ -110,13 +124,17 @@ class MediaController extends Controller
      */
     public function destroy($id)
     {
-        $media = Media::find($id);
-        $path = str_replace('storage/', '', $media->file_url);
-        $filePath = "public/{$path}";
-        if(Storage::delete($filePath)){
+        $media = Media::findOrFail($id); 
+        $imagepath = str_replace(env("MIX_ASSET_URL"),"",$media->file_url);
+
+        if(Storage::disk('s3')->exists($imagepath) && Storage::disk('s3')->delete($imagepath))
+        {
              $media->delete();
              return response()
             ->json(["message" => "Image file deleted"]);
         }
+
+        return response()
+            ->json(["message" => "Could not delete image"], 500);
     }
 }
