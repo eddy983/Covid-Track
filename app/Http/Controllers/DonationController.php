@@ -145,6 +145,16 @@ class DonationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'state' => 'required',
+            'donor_name' => 'required',
+            'donation_details' => 'required',
+            'donation_type' => 'required',
+            'donation_amount' => 'required',
+            'date' => 'required|date_format:Y-m-d',
+            'source' => 'required',
+        ]);
+        
         $donation = Donation::find($id);
         $donation->state = $request->state;
         $donation->donor_name = $request->donor_name;
