@@ -7,6 +7,9 @@ provider:
     stage: v1
     logs:
         restApi: true
+    apiGateway:
+        binaryMediaTypes:
+            - '*/*' 
     environment:
         APP_URL: 'https://dkqvmwcc151i4.cloudfront.net/'
         APP_KEY: ${ssm:/personalised_platform/APP_KEY}
