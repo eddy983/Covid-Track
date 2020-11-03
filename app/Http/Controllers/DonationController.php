@@ -10,7 +10,10 @@ class DonationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     *  
+     * 
+     * @queryParam  state string State ID. Example lagos 
+     * @queryParam  count int The number of records to return. Example 10
+     * 
      * @group  Donation Management
      * 
      * @queryParam  state string State ID. Example lagos 

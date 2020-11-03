@@ -10,7 +10,7 @@
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/donation" \
+    -G "http://localhost/api/donation?state=dolores&count=19" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -19,6 +19,13 @@ curl -X GET \
 const url = new URL(
     "http://localhost/api/donation"
 );
+
+let params = {
+    "state": "dolores",
+    "count": "19",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
 
 let headers = {
     "Content-Type": "application/json",
@@ -40,45 +47,11 @@ fetch(url, {
 ```json
 {
     "current_page": 1,
-    "data": [
-        {
-            "id": 2,
-            "state": "lagos",
-            "donor_name": "moses",
-            "donation_details": "get out",
-            "donation_type": "covid",
-            "donation_amount": "230499",
-            "source": "https:\/\/xenodochial-mestorf-b59d88.netlify.app\/donations",
-            "created_at": "2020-10-25T16:07:22.000000Z",
-            "updated_at": "2020-10-25T16:07:22.000000Z"
-        },
-        {
-            "id": 3,
-            "state": "lagos",
-            "donor_name": "moses",
-            "donation_details": "get out",
-            "donation_type": "covid",
-            "donation_amount": "230499",
-            "source": "https:\/\/xenodochial-mestorf-b59d88.netlify.app\/donations",
-            "created_at": "2020-10-25T16:07:25.000000Z",
-            "updated_at": "2020-10-25T16:07:25.000000Z"
-        },
-        {
-            "id": 4,
-            "state": "lago",
-            "donor_name": "moses",
-            "donation_details": "get out",
-            "donation_type": "covid",
-            "donation_amount": "230499",
-            "source": "https:\/\/xenodochial-mestorf-b59d88.netlify.app\/donations",
-            "created_at": "2020-10-25T16:24:22.000000Z",
-            "updated_at": "2020-10-25T16:24:22.000000Z"
-        }
-    ],
+    "data": [],
     "first_page_url": "http:\/\/localhost\/api\/donation?page=1",
-    "from": 1,
-    "last_page": 2,
-    "last_page_url": "http:\/\/localhost\/api\/donation?page=2",
+    "from": null,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost\/api\/donation?page=1",
     "links": [
         {
             "url": null,
@@ -91,28 +64,30 @@ fetch(url, {
             "active": true
         },
         {
-            "url": "http:\/\/localhost\/api\/donation?page=2",
-            "label": 2,
-            "active": false
-        },
-        {
-            "url": "http:\/\/localhost\/api\/donation?page=2",
+            "url": null,
             "label": "Next &raquo;",
             "active": false
         }
     ],
-    "next_page_url": "http:\/\/localhost\/api\/donation?page=2",
+    "next_page_url": null,
     "path": "http:\/\/localhost\/api\/donation",
-    "per_page": 3,
+    "per_page": 19,
     "prev_page_url": null,
-    "to": 3,
-    "total": 6
+    "to": null,
+    "total": 0
 }
 ```
 
 ### Request
 <small class="badge badge-green">GET</small>
  **`api/donation`**
+
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<code><b>state</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
+    string State ID. Example lagos
+
+<code><b>count</b></code>&nbsp; <small>string</small>         <i>optional</i>    <br>
+    int The number of records to return. Example 10
 
 
 
@@ -179,7 +154,7 @@ curl -X POST \
     "http://localhost/api/donation" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"donor_name":"eaque","donation_details":"ad","donation_type":"natus","donation_amount":"aut","source":"ut"}'
+    -d '{"donor_name":"magnam","donation_details":"aspernatur","donation_type":"nesciunt","donation_amount":"esse","source":"consequatur"}'
 
 ```
 
@@ -194,11 +169,11 @@ let headers = {
 };
 
 let body = {
-    "donor_name": "eaque",
-    "donation_details": "ad",
-    "donation_type": "natus",
-    "donation_amount": "aut",
-    "source": "ut"
+    "donor_name": "magnam",
+    "donation_details": "aspernatur",
+    "donation_type": "nesciunt",
+    "donation_amount": "esse",
+    "source": "consequatur"
 }
 
 fetch(url, {
@@ -246,7 +221,7 @@ curl -X PUT \
     "http://localhost/api/donation/{id}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"state":"non","donor_name":"ut","donation_details":"quia","donation_type":"aut","donation_amount":"distinctio","source":"odio"}'
+    -d '{"state":"architecto","donor_name":"laborum","donation_details":"repellat","donation_type":"officia","donation_amount":"quam","source":"ut"}'
 
 ```
 
@@ -261,12 +236,12 @@ let headers = {
 };
 
 let body = {
-    "state": "non",
-    "donor_name": "ut",
-    "donation_details": "quia",
-    "donation_type": "aut",
-    "donation_amount": "distinctio",
-    "source": "odio"
+    "state": "architecto",
+    "donor_name": "laborum",
+    "donation_details": "repellat",
+    "donation_type": "officia",
+    "donation_amount": "quam",
+    "source": "ut"
 }
 
 fetch(url, {
