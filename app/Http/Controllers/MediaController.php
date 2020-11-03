@@ -127,14 +127,22 @@ class MediaController extends Controller
         $media = Media::findOrFail($id); 
         $imagepath = str_replace(env("MIX_ASSET_URL"),"",$media->file_url);
 
-        if(Storage::disk('s3')->exists($imagepath) && Storage::disk('s3')->delete($imagepath))
+        if(!Storage::disk('s3')->exists($imagepath)){
+            return response()
+            ->json(["message" => "Image on $imagepath does not exist"], 404);
+        }
+
+        if(Storage::disk('s3')->delete($imagepath))
         {
              $media->delete();
              return response()
             ->json(["message" => "Image file deleted"]);
+        }else{
+            return response()
+            ->json(["message" => "Could not delete image"], 500);
         }
 
         return response()
-            ->json(["message" => "Could not delete image"], 500);
+            ->json(["message" => "Server Error"], 500);
     }
 }
