@@ -15,6 +15,6 @@ class Stats extends Model
     public function state()
     {
 
-        return $this->belongsTo('App\State');
+        return $this->belongsTo('App\Models\State');
     }
 }

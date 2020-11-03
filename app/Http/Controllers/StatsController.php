@@ -18,7 +18,8 @@ class StatsController extends Controller
      */
     public function index()
     {
-        $stats = Stats::all();
+        $stats = Stats::with('state')->get();
+        //dd($stats);
 
         $confirmed = DB::table("stats")->get()->sum("confirmed_cases");
 
