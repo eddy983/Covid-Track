@@ -17,4 +17,12 @@ class Stats extends Model
 
         return $this->belongsTo('App\Models\State');
     }
+
+    /**
+     * Get the parent of the activity feed record.
+     */
+    public function parentable()
+    {
+        return $this->morphTo();
+    }
 }

@@ -18,8 +18,17 @@ class StatsController extends Controller
      */
     public function index()
     {
-        $stats = Stats::with('state')->get();
-        //dd($stats);
+        $stats = Stats::with('state:id,name')->get();
+        foreach($stats as $stat)
+        {
+            $total_donations = DB::table("donations")
+                                    ->where("state",'like', "%{$stat->state->name}%")
+                                    ->get()
+            //dd($total_donations, $stat);
+                                    ->sum("donation_amount");
+            $stat->state->total_donations = $total_donations;
+        } 
+        
 
         $confirmed = DB::table("stats")->get()->sum("confirmed_cases");
 

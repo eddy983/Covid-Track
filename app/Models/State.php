@@ -17,4 +17,9 @@ class State extends Model
     {
         return $this->hasmany('App\Models\Stats');
     }
+
+    public function test()
+    {
+        return "hi";
+    }
 }
