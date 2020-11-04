@@ -44,9 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
- 
-            <li>Last updated: November 2 2020</li>
- 
+            <li>Last updated: November 4 2020</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -55,7 +53,156 @@
         <h1>Introduction</h1>
 <p>Welcome to our API documentation!</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile), and you can switch the programming language of the examples with the tabs in the top right (or from the nav menu at the top left on mobile).</aside><h1>Authenticating requests</h1>
-<p>This API is not authenticated.</p><h1>Donation Management</h1>
+<p>This API is not authenticated.</p><h1>Document Management</h1>
+<h2>Display a listing of the resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/document" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/document"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">[
+    {
+        "id": 1,
+        "name": "moses",
+        "file_name": "name.csv",
+        "file_url": "file\/name.csv",
+        "file_size": "19073",
+        "created_at": "2020-11-04T10:37:36.000000Z",
+        "updated_at": "2020-11-04T10:37:36.000000Z"
+    }
+]</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-green">GET</small>
+<strong><code>api/document</code></strong></p>
+<h2>Display the specified resource.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/api/document/{id}?id=cum" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/document/{id}"
+);
+
+let params = {
+    "id": "cum",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-green">GET</small>
+<strong><code>api/document/{id}</code></strong></p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p><code><b>id</b></code>&nbsp; <small>string</small>     <br>
+The id of the Document data.</p>
+<h2>Store a newly created resource in storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/api/document" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file":"a","name":"voluptate"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/document"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file": "a",
+    "name": "voluptate"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-black">POST</small>
+<strong><code>api/document</code></strong></p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p><code><b>file</b></code>&nbsp; <small>string</small>     <br>
+The uploaded file.</p>
+<p><code><b>name</b></code>&nbsp; <small>string</small>     <br>
+The uploaded file name given by the user.</p>
+<h2>Remove the specified resource from storage.</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://localhost/api/document/{id}?id=eos" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/document/{id}"
+);
+
+let params = {
+    "id": "eos",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>Request</h3>
+<p><small class="badge badge-red">DELETE</small>
+<strong><code>api/document/{id}</code></strong></p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p><code><b>id</b></code>&nbsp; <small>string</small>     <br>
+The id of the Document data.</p><h1>Donation Management</h1>
 <h2>Display a listing of the resource.</h2>
 <blockquote>
 <p>Example request:</p>
@@ -2836,29 +2983,10 @@ fetch(url, {
 <p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "Confirmed": 4,
-    "Active": 11,
-    "Recovery": 4,
-    "All stats record": [
-        {
-            "id": 1,
-            "state_id": 1,
-            "created_at": "2020-11-02T10:45:32.000000Z",
-            "updated_at": "2020-11-02T10:45:32.000000Z",
-            "confirmed_cases": 2,
-            "active_cases": 9,
-            "recovery": 2
-        },
-        {
-            "id": 2,
-            "state_id": 2,
-            "created_at": "2020-11-02T10:45:43.000000Z",
-            "updated_at": "2020-11-02T10:45:43.000000Z",
-            "confirmed_cases": 2,
-            "active_cases": 2,
-            "recovery": 2
-        }
-    ]
+    "Confirmed": 0,
+    "Active": 0,
+    "Recovery": 0,
+    "All stats record": []
 }</code></pre>
 <h3>Request</h3>
 <p><small class="badge badge-green">GET</small>
@@ -2871,7 +2999,7 @@ fetch(url, {
     "http://localhost/api/stats" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"state_id":15,"confirmed_cases":20,"active_cases":2,"recovery":7}'
+    -d '{"state_id":13,"confirmed_cases":9,"active_cases":7,"recovery":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/stats"
@@ -2883,10 +3011,10 @@ let headers = {
 };
 
 let body = {
-    "state_id": 15,
-    "confirmed_cases": 20,
-    "active_cases": 2,
-    "recovery": 7
+    "state_id": 13,
+    "confirmed_cases": 9,
+    "active_cases": 7,
+    "recovery": 20
 }
 
 fetch(url, {
@@ -2913,7 +3041,7 @@ The recovery of the Statistic data.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/stats/{id}?id=ea" \
+    -G "http://localhost/api/stats/{id}?id=id" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -2921,7 +3049,7 @@ The recovery of the Statistic data.</p>
 );
 
 let params = {
-    "id": "ea",
+    "id": "id",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -2948,17 +3076,17 @@ The id of the Statistics data.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X PUT \
-    "http://localhost/api/stats/{id}?id=ipsum" \
+    "http://localhost/api/stats/{id}?id=qui" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"state_id":15,"confirmed_cases":18,"active_cases":7,"recovery":4}'
+    -d '{"state_id":5,"confirmed_cases":14,"active_cases":5,"recovery":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/stats/{id}"
 );
 
 let params = {
-    "id": "ipsum",
+    "id": "qui",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -2969,10 +3097,10 @@ let headers = {
 };
 
 let body = {
-    "state_id": 15,
-    "confirmed_cases": 18,
-    "active_cases": 7,
-    "recovery": 4
+    "state_id": 5,
+    "confirmed_cases": 14,
+    "active_cases": 5,
+    "recovery": 14
 }
 
 fetch(url, {
@@ -3002,7 +3130,7 @@ The recovery of the Statistic data.</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost/api/stats/{id}?id=et" \
+    "http://localhost/api/stats/{id}?id=vero" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
@@ -3010,7 +3138,7 @@ The recovery of the Statistic data.</p>
 );
 
 let params = {
-    "id": "et",
+    "id": "vero",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));

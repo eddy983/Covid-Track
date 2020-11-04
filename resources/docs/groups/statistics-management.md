@@ -39,29 +39,10 @@ fetch(url, {
 
 ```json
 {
-    "Confirmed": 4,
-    "Active": 11,
-    "Recovery": 4,
-    "All stats record": [
-        {
-            "id": 1,
-            "state_id": 1,
-            "created_at": "2020-11-02T10:45:32.000000Z",
-            "updated_at": "2020-11-02T10:45:32.000000Z",
-            "confirmed_cases": 2,
-            "active_cases": 9,
-            "recovery": 2
-        },
-        {
-            "id": 2,
-            "state_id": 2,
-            "created_at": "2020-11-02T10:45:43.000000Z",
-            "updated_at": "2020-11-02T10:45:43.000000Z",
-            "confirmed_cases": 2,
-            "active_cases": 2,
-            "recovery": 2
-        }
-    ]
+    "Confirmed": 0,
+    "Active": 0,
+    "Recovery": 0,
+    "All stats record": []
 }
 ```
 
@@ -83,7 +64,7 @@ curl -X POST \
     "http://localhost/api/stats" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"state_id":15,"confirmed_cases":20,"active_cases":2,"recovery":7}'
+    -d '{"state_id":13,"confirmed_cases":9,"active_cases":7,"recovery":20}'
 
 ```
 
@@ -98,10 +79,10 @@ let headers = {
 };
 
 let body = {
-    "state_id": 15,
-    "confirmed_cases": 20,
-    "active_cases": 2,
-    "recovery": 7
+    "state_id": 13,
+    "confirmed_cases": 9,
+    "active_cases": 7,
+    "recovery": 20
 }
 
 fetch(url, {
@@ -143,7 +124,7 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/stats/{id}?id=ea" \
+    -G "http://localhost/api/stats/{id}?id=id" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -154,7 +135,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "ea",
+    "id": "id",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -194,10 +175,10 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/stats/{id}?id=ipsum" \
+    "http://localhost/api/stats/{id}?id=qui" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"state_id":15,"confirmed_cases":18,"active_cases":7,"recovery":4}'
+    -d '{"state_id":5,"confirmed_cases":14,"active_cases":5,"recovery":14}'
 
 ```
 
@@ -207,7 +188,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "ipsum",
+    "id": "qui",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -218,10 +199,10 @@ let headers = {
 };
 
 let body = {
-    "state_id": 15,
-    "confirmed_cases": 18,
-    "active_cases": 7,
-    "recovery": 4
+    "state_id": 5,
+    "confirmed_cases": 14,
+    "active_cases": 5,
+    "recovery": 14
 }
 
 fetch(url, {
@@ -267,7 +248,7 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/stats/{id}?id=et" \
+    "http://localhost/api/stats/{id}?id=vero" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
@@ -278,7 +259,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "et",
+    "id": "vero",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
