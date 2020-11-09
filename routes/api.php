@@ -7,6 +7,7 @@ use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\DocumentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -51,4 +52,11 @@ Route::group(['prefix' => 'state'], function () {
     Route::get('/', [StateController::class, 'index']);
     Route::post('/', [StateController::class, 'store']);
     
+});
+
+Route::group(['prefix' => 'document'], function () {
+    Route::get('/', [DocumentController::class, 'index']);
+    Route::get('/{id}', [DocumentController::class, 'show']);
+    Route::post('/', [DocumentController::class, 'store']);
+    Route::delete('/{id}', [DocumentController::class, 'destroy']);
 });
