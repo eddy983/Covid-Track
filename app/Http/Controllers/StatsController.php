@@ -38,7 +38,7 @@ class StatsController extends Controller
 
         return response()
                     ->json([
-                         "Confirmed" => $confirmed , "Active" => $active , "Recovery" => $recovery ,"All stats record" => $stats,
+                         "confirmed" => $confirmed , "active" => $active , "recovery" => $recovery ,"stats" => $stats,
                     ], 200);
     }
 
@@ -59,6 +59,8 @@ class StatsController extends Controller
      * @bodyParam  confirmed_cases integer required The confirmed_cases of the Statistic data.
      * @bodyParam  active_cases integer required The active_cases of the Statistic data.
      * @bodyParam  recovery integer required The recovery of the Statistic data.
+     * @bodyParam  budgeted_spending string required The budgeted_spending of the Statistic data.
+     * @bodyParam  actual_spending string required The actual_spending of the Statistic data.
      * 
      * @group  Statistics Management
      * @param  \Illuminate\Http\Request  $request
@@ -67,8 +69,10 @@ class StatsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'state_id' => 'required',
+            'state_id' => 'required|exists:states,id',
             'confirmed_cases' => 'required',
+            'budgeted_spending' => 'required|string',
+            'actual_spending' => 'required|string',
             'active_cases' => 'required',
             'recovery' => 'required',
         ]);
@@ -76,6 +80,8 @@ class StatsController extends Controller
         $stats->state_id = $request->state_id;
         $stats->confirmed_cases = $request->confirmed_cases;
         $stats->active_cases = $request->active_cases;
+        $stats->budgeted_spending = $request->budgeted_spending;
+        $stats->actual_spending = $request->actual_spending;
         $stats->recovery = $request->recovery;
         $stats->save();
 
@@ -116,6 +122,8 @@ class StatsController extends Controller
      * @bodyParam  confirmed_cases integer required The confirmed_cases of the Statistic data.
      * @bodyParam  active_cases integer required The active_cases of the Statistic data.
      * @bodyParam  recovery integer required The recovery of the Statistic data.
+     * @bodyParam  budgeted_spending string required The budgeted_spending of the Statistic data.
+     * @bodyParam  actual_spending string required The actual_spending of the Statistic data.
      * 
      *
      * @group  Statistics Management
@@ -128,6 +136,8 @@ class StatsController extends Controller
     {
         $this->validate($request, [
             'state_id' => 'required',
+            'budgeted_spending' => 'required|string',
+            'actual_spending' => 'required|string',
             'confirmed_cases' => 'required',
             'active_cases' => 'required',
             'recovery' => 'required',
@@ -136,6 +146,8 @@ class StatsController extends Controller
         $stats = Stats::find($id);
         $stats->state_id = $request->state_id;
         $stats->confirmed_cases = $request->confirmed_cases;
+        $stats->budgeted_spending = $request->budgeted_spending;
+        $stats->actual_spending = $request->actual_spending;
         $stats->active_cases = $request->active_cases;
         $stats->recovery = $request->recovery;
 
