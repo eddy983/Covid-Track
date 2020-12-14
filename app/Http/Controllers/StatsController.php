@@ -21,13 +21,15 @@ class StatsController extends Controller
         $stats = Stats::with('state:id,name')->get();
         foreach($stats as $stat)
         {
-            $state_name = $stat->state->name ?? NULL;
-            $total_donations = DB::table("donations")
-                                    ->where("state",'like', "%{$state_name}%")
-                                    ->get()
-            //dd($total_donations, $stat);
-                                    ->sum("donation_amount");
-            $stat->state->total_donations = $total_donations;
+            if($stat->state){
+                $total_donations = DB::table("donations")
+                    ->where("state",'like', "%{$stat->state->name}%")
+                    ->get()
+                //dd($total_donations, $stat);
+                                ->sum("donation_amount");
+                $stat->state->total_donations = $total_donations;
+            }
+
         } 
         
 
